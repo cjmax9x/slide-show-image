@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./themify-icons/themify-icons.css">
+    <link rel="stylesheet" href="./style.css">
+    <title>Slide Show</title>
+</head>
+<body>
+    <div class="app">
+        <div class="container">
+            <div class="main-preview">
+                <img class="image-preview" src="img1.jpeg" alt="" >
+                <i class="ti-angle-left"></i>
+                <i class="ti-angle-right"></i>
+            </div>
+            <div class="slide-image-box">
+                <img class="slide-image slide-image--active" src="img1.jpeg" alt="" >
+                <img class="slide-image" src="img2.jpeg" alt="" >
+                <img class="slide-image" src="img3.jpeg" alt="" >
+                <img class="slide-image" src="img4.jpeg" alt="" >
+                <img class="slide-image" src="img5.jpeg" alt="" >
+                <img class="slide-image" src="img6.jpeg" alt="" >
+                <img class="slide-image" src="img7.jpeg" alt="" >
+                <img class="slide-image" src="img8.jpeg" alt="" >
+            </div>
+        </div>
+    </div>
+    <script>
+        let imagePreviewE = document.querySelector('.image-preview')
+        let slideImageEs = document.querySelectorAll('.slide-image'),slideImageEsLength = slideImageEs.length;
+        let nextImageE = document.querySelector('.ti-angle-right')
+        let prevImageE = document.querySelector('.ti-angle-left')
+        let index = 0
+
+        function renderImage(){
+            imagePreviewE.src = slideImageEs[index].src
+            document.querySelector('.slide-image--active')?.classList.remove('slide-image--active')
+            slideImageEs[index].classList.add('slide-image--active')
+        }
+        for(let i = 0; i<slideImageEsLength; i++){
+            console.log(i, slideImageEs[i])
+            slideImageEs[i].onclick = function(){
+            console.log(i, slideImageEs[i])
+                index = i
+                renderImage()
+            }
+        }
+        nextImageE.onclick = function(){
+                if(index < slideImageEsLength-1){
+                    index++
+                    renderImage()
+                }
+                else if(index == slideImageEsLength-1){
+                    index = 0
+                    renderImage()
+                }
+            }
+            prevImageE.onclick = function(){
+                if(index == 0 ){
+                    index = slideImageEsLength-1
+                    renderImage()
+                }else if(index <= slideImageEsLength-1){
+                    index--
+                    renderImage()
+                }
+                
+            }
+    </script>
+</body>
+</html>
